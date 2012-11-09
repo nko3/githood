@@ -1,0 +1,19 @@
+{
+  "name": "nko3-nic-team",
+  "version": "0.0.0",
+  "description": "NIC Team",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nko3/nic-team.git"
+  },
+  "dependencies": {
+  },
+  "engines": {
+    "node": "0.8.x"
+  },
+  "subdomain": "nic-team.nko3"
+}
