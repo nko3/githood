@@ -12,8 +12,8 @@ var app = express();
 app.configure(function(){
   app.set('config', process.env.CONFIG || process.env.HOME + '/.githood');
   app.set('port', process.env.PORT || 8000);
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
+  app.set('views', __dirname + '/lib/views');
+  app.set('view engine', 'ejs');
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
