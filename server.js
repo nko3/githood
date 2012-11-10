@@ -1,19 +1,17 @@
 var http = require('http');
-var fs = require('fs');
 var mdns = require('mdns');
 
 var publicApp = require('./lib/publicApp');
 var privateApp = require('./lib/privateApp');
 
-http.createServer(publicApp).listen(publicApp.get('port'), function() {
-  var config = JSON.parse(fs.readFileSync(publicApp.get('config')));
-  var txt_record = { name: 'Githood', description: config.server.description };
-  var ad = mdns.createAdvertisement(mdns.tcp('http'), publicApp.get('port'), {txtRecord: txt_record});
+http.createServer(publicApp).listen(publicApp.port, function() {
+  var txt_record = { name: 'Githood', description: publicApp.config.server.description };
+  var ad = mdns.createAdvertisement(mdns.tcp('http'), publicApp.port, {txtRecord: txt_record});
   ad.start();
-  console.log("Public Express server listening on http://0.0.0.0:" + publicApp.get('port'));
+  console.log("Public Express server listening on http://0.0.0.0:" + publicApp.port);
 });
-http.createServer(privateApp).listen(privateApp.get('port'), '127.0.0.1', function() {
-  console.log("Private Express server listening on http://127.0.0.1:" + privateApp.get('port'));
+http.createServer(privateApp).listen(privateApp.port, '127.0.0.1', function() {
+  console.log("Private Express server listening on http://127.0.0.1:" + privateApp.port);
 });
 
 var browser = mdns.createBrowser(mdns.tcp('http'));
