@@ -13,6 +13,10 @@ package { 'build-essential':
   ensure => present,
 }
 
+package { 'libavahi-compat-libdnssd-dev':
+  ensure => present,
+}
+
 $nodeVersion = '0.8.14'
 
 exec { 'download-nodejs':
