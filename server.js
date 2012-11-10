@@ -28,13 +28,13 @@ browser.on('serviceUp', function(service) {
              port: service.port
             };
     neighbors.push(n);
-    console.log("service up:", n.name, n.host, n.port);
+    console.log("service up:", n);
   }
 });
 browser.on('serviceDown', function(service) {
   neighbors = neighbors.filter(function(n) {
     if (n.name === service.name) {
-      console.log("service down:", n.name, n.host, n.port);
+      console.log("service down:", n);
       return false;
     }
     else {
