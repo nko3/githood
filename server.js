@@ -6,33 +6,51 @@ var path = require('path');
 var fs = require('fs');
 var mdns = require('mdns');
 
+var publicApp = express();
+var privateApp = express();
 
-var app = express();
-
-app.configure(function(){
-  app.set('config', process.env.CONFIG || process.env.HOME + '/.githood');
-  app.set('port', process.env.PORT || 8000);
-  app.set('views', __dirname + '/lib/views');
-  app.set('view engine', 'ejs');
-  app.use(express.favicon());
-  app.use(express.logger('dev'));
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(app.router);
-  app.use(express.static(path.join(__dirname, 'public')));
+publicApp.configure(function(){
+  publicApp.set('config', process.env.CONFIG || process.env.HOME + '/.githood');
+  publicApp.set('port', process.env.PUBLIC_PORT || 8000);
+  publicApp.set('views', __dirname + '/lib/views');
+  publicApp.set('view engine', 'ejs');
+  publicApp.use(express.favicon());
+  publicApp.use(express.logger('dev'));
+  publicApp.use(express.bodyParser());
+  publicApp.use(express.methodOverride());
+  publicApp.use(publicApp.router);
+  publicApp.use(express.static(path.join(__dirname, 'public')));
+});
+privateApp.configure(function(){
+  privateApp.set('config', publicApp.get('config'));
+  privateApp.set('port', process.env.PRIVATE_PORT || 8001);
+  privateApp.set('views', __dirname + '/views');
+  privateApp.set('view engine', 'jade');
+  privateApp.use(express.favicon());
+  privateApp.use(express.logger('dev'));
+  privateApp.use(express.bodyParser());
+  privateApp.use(express.methodOverride());
+  privateApp.use(privateApp.router);
+  privateApp.use(express.static(path.join(__dirname, 'public')));
 });
 
-app.configure('development', function(){
-  app.use(express.errorHandler());
+publicApp.configure('development', function(){
+  publicApp.use(express.errorHandler());
+});
+privateApp.configure('development', function(){
+  privateApp.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+publicApp.get('/', routes.index);
+publicApp.get('/users', user.list);
 
-http.createServer(app).listen(app.get('port'), function(){
-  var config = JSON.parse(fs.readFileSync(app.get('config')));
+http.createServer(publicApp).listen(publicApp.get('port'), function(){
+  var config = JSON.parse(fs.readFileSync(publicApp.get('config')));
   var txt_record = { name: 'Githood', description: config.server.description };
-  var ad = mdns.createAdvertisement(mdns.tcp('http'), app.get('port'), {txtRecord: txt_record});
+  var ad = mdns.createAdvertisement(mdns.tcp('http'), publicApp.get('port'), {txtRecord: txt_record});
   ad.start();
-  console.log("Express server listening on http://0.0.0.0:" + app.get('port'));
+  console.log("Public Express server listening on http://0.0.0.0:" + publicApp.get('port'));
+});
+http.createServer(privateApp).listen(privateApp.get('port'), '127.0.0.1', function(){
+  console.log("Private Express server listening on http://127.0.0.1:" + privateApp.get('port'));
 });
