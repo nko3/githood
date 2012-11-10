@@ -1,5 +1,7 @@
 var http = require('http');
 var mdns = require('mdns');
+var sf = require("sf");
+var request = require('request');
 
 var publicApp = require('./lib/publicApp');
 var privateApp = require('./lib/privateApp');
@@ -22,8 +24,19 @@ browser.on('serviceUp', function(service) {
              name: service.name,
              description: service.txtRecord.description,
              host: service.host,
-             port: service.port
+             port: service.port,
+             repositories: []
             };
+    var url = sf("http://{host}:{port}/apiv1/repos", n);
+
+    request(url, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        console.log(url, 'SUCCESS:', body);
+      } else {
+        console.log(url, 'ERROR:', error);
+      }
+    })
+
     privateApp.neighbors.push(n);
     console.log("service up:", n);
   }

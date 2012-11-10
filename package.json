@@ -13,7 +13,9 @@
   "dependencies": {
     "express": "~3.0.2",
     "mdns": "0.0.7",
-    "ejs": "~0.8.3"
+    "ejs": "~0.8.3",
+    "request": "~2.12.0",
+    "sf": "~0.1.5"
   },
   "engines": {
     "node": "0.8.x"
