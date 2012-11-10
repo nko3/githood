@@ -5,6 +5,7 @@ var request = require('request');
 var publicApp = require('./lib/publicApp');
 var privateApp = require('./lib/privateApp');
 var browser = require('./lib/browser');
+var gitServer = require('./lib/gitServer');
 
 http.createServer(publicApp).listen(publicApp.port, function() {
   var txt_record = { name: 'Githood', description: publicApp.config.server.description };
@@ -17,17 +18,9 @@ http.createServer(privateApp).listen(privateApp.port, '127.0.0.1', function() {
   console.log("Private Express server listening on http://127.0.0.1:" + privateApp.port);
 });
 
-
-//var gitHttp = new GitHttp();
-//gitHttp.on('pull', function(pull) { pull.allow(); });
-//gitHttp.on('push', function(pull) { pull.deny(); });
-
-//http.createServer(function(req, res) {
-  //gitHttp.handle(req, res);
-//}).listen(8002);
-
-var config = require('./lib/config').get();
-console.log(config);
+http.createServer(gitServer).listen(8002, '0.0.0.0', function() {
+  console.log("Git server listening on http://0.0.0.0:" + 8002);
+});
 
 var browser = new browser(privateApp.neighbors);
 browser.start();
