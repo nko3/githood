@@ -15,7 +15,6 @@ http.createServer(privateApp).listen(privateApp.port, '127.0.0.1', function() {
 });
 
 var browser = mdns.createBrowser(mdns.tcp('http'));
-var neighbors = [];
 
 browser.on('serviceUp', function(service) {
   if (service.txtRecord && service.txtRecord.name === 'Githood') {
@@ -25,12 +24,12 @@ browser.on('serviceUp', function(service) {
              host: service.host,
              port: service.port
             };
-    neighbors.push(n);
+    privateApp.neighbors.push(n);
     console.log("service up:", n);
   }
 });
 browser.on('serviceDown', function(service) {
-  neighbors = neighbors.filter(function(n) {
+  privateApp.neighbors = privateApp.neighbors.filter(function(n) {
     if (n.name === service.name) {
       console.log("service down:", n);
       return false;
