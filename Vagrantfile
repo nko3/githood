@@ -5,6 +5,8 @@ Vagrant::Config.run do |config|
   config.vm.box = "precise64"
   config.vm.host_name = "githood"
   config.vm.forward_port 8000, 8000
+  config.vm.forward_port 8001, 8001
+  config.vm.forward_port 8002, 8002
   config.vm.network :bridged
   config.vm.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
   config.vm.provision :puppet do |puppet|
