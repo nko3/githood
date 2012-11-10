@@ -1,14 +1,14 @@
 {
   "name": "nko3-nic-team",
   "version": "0.0.0",
-  "description": "NIC Team",
+  "description": "Githood",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:nko3/nic-team.git"
+    "url": "git@github.com:nko3/githood.git"
   },
   "dependencies": {
     "express": "~3.0.2",
