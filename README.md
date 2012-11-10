@@ -5,7 +5,7 @@
 ### GitHub — [Team][2], [Repo][3]
 
 ~~~sh
-git clone git@github.com:nko3/nic-team.git
+git clone git@github.com:nko3/githood.git
 ~~~
 
 ### Nodejitsu — [More details][5], [Handbook][4]
