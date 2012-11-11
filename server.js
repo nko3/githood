@@ -16,6 +16,6 @@ http.createServer(app).listen(app.port, '127.0.0.1', function() {
 
 config.repos.forEach(function(repo) {
   if (repo.shared) {
-    discovery.advertiseGitRepo(config.server.description, gitPort, repo);
+    discovery.repoAvailable(config.server.description, gitPort, repo);
   }
 });
