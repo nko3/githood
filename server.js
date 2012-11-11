@@ -39,11 +39,16 @@ io.sockets.on('connection', function(socket) {
   });
 });
 
-config.repos.forEach(function(repo) {
-  if (repo.shared) {
-    discovery.repoAvailable(config.server.description, gitPort, repo);
-  }
-});
+announceAll();
+setTimeout(announceAll, 2 * 1000);
+
+function announceAll() {
+  config.repos.forEach(function(repo) {
+    if (repo.shared) {
+      discovery.repoAvailable(config.server.description, gitPort, repo);
+    }
+  });
+}
 
 process.on('exit', function() {
   config.repos.forEach(function(repo) {
