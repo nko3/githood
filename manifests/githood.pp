@@ -13,6 +13,10 @@ package { 'build-essential':
   ensure => present,
 }
 
+package { 'git-core':
+  ensure => present,
+}
+
 package { 'libavahi-compat-libdnssd-dev':
   ensure => present,
 }
