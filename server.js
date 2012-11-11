@@ -42,3 +42,9 @@ config.repos.forEach(function(repo) {
     discovery.repoAvailable(config.server.description, gitPort, repo);
   }
 });
+
+process.on('exit', function() {
+  config.repos.forEach(function(repo) {
+    discovery.repoUnavailable(gitPort, repo);
+  });
+});
