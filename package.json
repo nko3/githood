@@ -15,7 +15,6 @@
     "ejs": "~0.8.3",
     "request": "~2.12.0",
     "sf": "~0.1.5",
-    "readable-stream": "0.0.3",
     "express-ejs-layouts": "~0.3.0",
     "git-http": "git://github.com/kunklejr/node-git-http.git"
   },

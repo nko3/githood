@@ -15,5 +15,7 @@ http.createServer(privateApp).listen(privateApp.port, '127.0.0.1', function() {
 });
 
 config.repos.forEach(function(repo) {
-  discovery.advertiseGitRepo(config.server.description, publicGitPort, repo);
+  if (repo.shared) {
+    discovery.advertiseGitRepo(config.server.description, publicGitPort, repo);
+  }
 });
