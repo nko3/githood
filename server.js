@@ -14,7 +14,7 @@ gitServer.listen(gitPort, function() {
 var appServer = http.createServer(app);
 var io = require('socket.io').listen(appServer);
 
-appServer.listen(app.port, '127.0.0.1', function() {
+appServer.listen(app.port, '0.0.0.0', function() {
   console.log("Private Express server listening on http://" + appServer.address().address + ":" + appServer.address().port);
 });
 

@@ -2,7 +2,7 @@
   "server": {
     "description": "Sample ~/.githood",
     "gitPort": 8000,
-    "privatePort": 8001
+    "privatePort": 80
   },
   "repos": [
     {
