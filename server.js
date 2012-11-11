@@ -10,8 +10,31 @@ http.createServer(gitServer).listen(gitPort, function() {
   console.log("Public Git server listening on http://0.0.0.0:" + gitPort);
 });
 
-http.createServer(app).listen(app.port, '127.0.0.1', function() {
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+
+server.listen(app.port, '127.0.0.1', function() {
   console.log("Private Express server listening on http://127.0.0.1:" + app.port);
+});
+
+var sockets = {};
+io.sockets.on('connection', function(socket) {
+  sockets[socket.id] = socket;
+  socket.on('disconnect', function() {
+    delete sockets[socket.id];
+  });
+});
+
+[
+  'repoAvailable',
+  'repoUnavailable'
+].forEach(function(event) {
+  discovery.on(event, function(data) {
+    Object.keys(sockets).forEach(function(key) {
+      var socket = sockets[key];
+      socket.emit(event, data);
+    });
+  });
 });
 
 config.repos.forEach(function(repo) {

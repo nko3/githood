@@ -16,7 +16,8 @@
     "request": "~2.12.0",
     "sf": "~0.1.5",
     "express-ejs-layouts": "~0.3.0",
-    "git-http": "git://github.com/kunklejr/node-git-http.git"
+    "git-http": "git://github.com/kunklejr/node-git-http.git",
+    "socket.io": "~0.9.11"
   },
   "engines": {
     "node": "0.8.x"
