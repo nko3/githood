@@ -1,8 +1,38 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */ 
 }
 
-a {
-  color: #00B7FF;
+h4 { 
+  margin-top: 1em; 
+}
+
+ul { 
+  list-style-position: inside;
+}
+
+div.repos {
+  margin-top: 3em;
+  border-bottom: 1px solid #ddd;
+}
+
+div.repos div.repo {
+  border-top: 1px solid #ddd;
+}
+
+div.repos h3 {
+  font-size: 150%;
+}
+
+div.repos h4 {
+  font-size: 120%;
+  margin: -0.7em 0 1em 0;
+  font-weight: normal;
+}
+
+div.repo .details {
+  float: right;
+  margin-top: 10px;
+  color: #777;
+  font-size: 85%;
+  font-weight: bold;
 }
