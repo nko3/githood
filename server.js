@@ -4,12 +4,11 @@ var publicApp = require('./lib/publicApp');
 var privateApp = require('./lib/privateApp');
 var mdnsBrowser = require('./lib/mdnsBrowser');
 var gitServer = require('./lib/gitServer');
+var MdnsAdvertisement = require('./lib/mdnsAdvertisement');
 
+privateApp.ad = new MdnsAdvertisement(publicApp.port, publicApp.config.server.description);
 http.createServer(publicApp).listen(publicApp.port, function() {
-  var txt_record = { name: 'Githood', description: publicApp.config.server.description };
-  var ad = mdns.createAdvertisement(mdns.tcp('http'), publicApp.port, {txtRecord: txt_record});
-  privateApp.ad = ad;
-  ad.start();
+  privateApp.ad.start();
   console.log("Public Express server listening on http://0.0.0.0:" + publicApp.port);
 });
 
