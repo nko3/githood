@@ -27,7 +27,8 @@ io.sockets.on('connection', function(socket) {
 
 [
   'repoAvailable',
-  'repoUnavailable'
+  'repoUnavailable',
+  'repoNotification'
 ].forEach(function(event) {
   discovery.on(event, function(data) {
     Object.keys(sockets).forEach(function(key) {
