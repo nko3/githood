@@ -29,3 +29,10 @@ div.repos h4 {
   font-weight: normal;
 }
 
+div.repo .details {
+  float: right;
+  margin-top: 20px;
+  color: #777;
+  font-size: 85%;
+  font-weight: bold;
+}
