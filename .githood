@@ -1,0 +1,26 @@
+{
+  "server": {
+    "description": "Sample ~/.githood",
+    "gitPort": 8000,
+    "privatePort": 8001
+  },
+  "repos": [
+    {
+      "path": "/vagrant",
+      "name": "githood",
+      "description": "our awesome NKO3 application",
+      "language": "JavaScript",
+      "watchers": [],
+      "shared": true
+    },
+    {
+      "path": "/vagrant/node_modules/git-http",
+      "name": "node-git-http",
+      "description": "Git smart HTTP handler",
+      "language": "JavaScript",
+      "watchers": [],
+      "shared": true
+    }
+  ],
+  "_events": {}
+}
